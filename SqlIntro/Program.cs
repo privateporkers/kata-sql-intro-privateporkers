@@ -6,7 +6,7 @@ namespace SqlIntro
     {
         static void Main(string[] args)
         {
-            var connectionString = " Server=localhost;Database=adventureworks;Uid=myUsername;Pwd=";
+            var connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
             var repo = new ProductRepository(connectionString);
 
             foreach (var prod in repo.GetProducts())
@@ -14,10 +14,7 @@ namespace SqlIntro
                 Console.WriteLine("Product Name:" + prod.Name);
             }
 
-           
             Console.ReadLine();
         }
-
-       
     }
 }

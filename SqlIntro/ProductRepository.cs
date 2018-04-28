@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using MySql.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -28,7 +29,7 @@ namespace SqlIntro
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM product"; //TODO:  Write a SELECT statement that gets all products
+                cmd.CommandText = "SELECT * FROM product;";
                 var dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -43,10 +44,11 @@ namespace SqlIntro
         /// <param name="id"></param>
         public void DeleteProduct(int id)
         {
+            var deleteID = 0;
             using (var conn = new MySqlConnection(_connectionString))
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = ""; //Write a delete statement that deletes by id
+                cmd.CommandText = "DELETE FROM product WHERE ProductID = 1000;"; //Write a delete statement that deletes by id
                 cmd.ExecuteNonQuery();
             }
         }
@@ -76,7 +78,7 @@ namespace SqlIntro
             using (var conn = new MySqlConnection(_connectionString))
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT into product (name) values(@name)";
+                cmd.CommandText = "INSERT into product (Name) values(@name)";
                 cmd.Parameters.AddWithValue("@name", prod.Name);
                 cmd.ExecuteNonQuery();
             }
