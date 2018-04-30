@@ -15,7 +15,7 @@ namespace SqlIntro
 {
     public class DapperProductRepository
     {
-        private readonly string connectionString;
+       /* private readonly string connectionString;
         public DapperProductRepository(string connectionString)
         {
            connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
@@ -36,6 +36,6 @@ namespace SqlIntro
                 Product Yes;
                 conn.Open();
             }
-        }
+        }*/
     }
 }

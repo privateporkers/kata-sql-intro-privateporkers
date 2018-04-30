@@ -14,8 +14,7 @@ namespace SqlIntro
                 Console.WriteLine("Product Name:" + prod.Name);
             }
 
-            var testDap = new DapperProductRepository(connectionString);
-            foreach (var test in testDap.GetProducts())
+            repo.DeleteProduct(324);
 
             Console.ReadLine();
         }
