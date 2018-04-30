@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Dapper;
 
 
 namespace SqlIntro
@@ -15,7 +16,7 @@ namespace SqlIntro
     public class DapperProductRepository
     {
         private readonly string connectionString;
-        public DapperProductRepository()
+        public DapperProductRepository(string connectionString)
         {
            connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
         }
@@ -27,12 +28,13 @@ namespace SqlIntro
             }
         }
 
-        public void Add(Product prod)
+        public IEnumerable<Product> Add()
         {
-            using (IDbConnection  db = Connection)
+            using (IDbConnection  conn = Connection)
             {
                 string update = "SELECT * FROM product";
-                db.Open();
+                Product Yes;
+                conn.Open();
             }
         }
     }
