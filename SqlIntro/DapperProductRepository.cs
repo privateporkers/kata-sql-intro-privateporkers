@@ -13,29 +13,41 @@ using Dapper;
 
 namespace SqlIntro
 {
-    public class DapperProductRepository
+    public class DapperProductRepository : IProductRepo
     {
-       /* private readonly string connectionString;
+        private readonly string _connectionString;
+
         public DapperProductRepository(string connectionString)
         {
-           connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
+            _connectionString = connectionString;
         }
-        public IDbConnection Connection
+
+        public IEnumerable<Product> GetProducts()
         {
-            get
+            using(var conn = new MySqlConnection(_connectionString))
             {
-                return new SqlConnection(connectionString);
+                conn.Open();
+                return conn.Query<Product> ("select ProductId as Id, Name from product");
             }
         }
 
-        public IEnumerable<Product> Add()
+        public void DeleteProduct(int id)
         {
-            using (IDbConnection  conn = Connection)
+            using (var conn = new MySqlConnection(_connectionString))
             {
-                string update = "SELECT * FROM product";
-                Product Yes;
-                conn.Open();
+            conn.Open();
+            conn.Query ($"DELETE FROM product WHERE ProductId = {id}");
             }
-        }*/
+        }
+
+        public void InsertProduct(string Name)
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                var cmd = conn.CreateCommand();
+                conn.Open();
+                conn.Query ($"INSERT INTO product (Name) VALUES ('{Name}')");
+            }
+        }
     }
 }
