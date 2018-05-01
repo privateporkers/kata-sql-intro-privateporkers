@@ -9,8 +9,8 @@ namespace SqlIntro
         IEnumerable<Product> GetProductWithReview();
         IEnumerable<Product> GetProductAndReview();
         void DeleteProduct(int id);
-        void InsertProduct(String Name);
-        void UpdateProduct(string ProductName, int ProductId);
+        void InsertProduct(Product Name);
+        void UpdateProduct(Product prod);
 
     }
 }

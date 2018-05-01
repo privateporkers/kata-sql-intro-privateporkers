@@ -40,26 +40,21 @@ namespace SqlIntro
             }
         }
 
-        public void InsertProduct(string Name)
+        public void InsertProduct(Product prod)
         {
             using (var conn = new MySqlConnection(_connectionString))
             {
-                var cmd = conn.CreateCommand();
                 conn.Open();
-                conn.Query ("INSERT INTO product (Name) VALUES ('@name')");
-                cmd.Parameters.AddWithValue("@name", Name);
+                conn.Query ("INSERT INTO product (Name) VALUES ('@name')", new {@name = prod.Name});
             }
         }
 
-        public void UpdateProduct(string ProductName, int ProductId)
+        public void UpdateProduct(Product prod)
         {
             using (var conn = new MySqlConnection(_connectionString))
             {
-                var cmd = conn.CreateCommand();
                 conn.Open();
-                conn.Query ("UPDATE product SET Name=('@pName') WHERE ProductId = (@pId) ");
-                cmd.Parameters.AddWithValue("pName", ProductName);
-                cmd.Parameters.AddWithValue("pId", ProductId);
+                conn.Query ("UPDATE product SET Name=('@pName') WHERE ProductId = (@Id) ", new {pName = prod.Name, Id = prod.Id});
 
             }
         }
