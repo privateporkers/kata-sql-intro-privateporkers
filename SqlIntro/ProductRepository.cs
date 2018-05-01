@@ -95,7 +95,29 @@ namespace SqlIntro
                 FROM product as p
                 LEFT JOIN productreview as pr ON p.ProductId = pr.ProductId;");
 
-                
+                var dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    yield return new Product { Name = dr["Name"].ToString(), Comments = dr["Comments"].ToString()};
+                }
+            }
+        }
+
+       public IEnumerable<Product> GetProductWithReview()
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                var cmd = conn.CreateCommand();
+                conn.Open();
+                cmd.CommandText = (@"SELECT p.Name, pr.Comments
+                FROM product as p
+                INNER JOIN productreview as pr ON p.ProductId = pr.ProductId;");
+
+                var dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    yield return new Product { Name = dr["Name"].ToString(), Comments = dr["Comments"].ToString()};
+                }
             }
         }
     }
