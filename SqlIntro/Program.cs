@@ -9,15 +9,15 @@ namespace SqlIntro
             var connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
             var repo = new DapperProductRepository(connectionString);
 
-            foreach (var prod in repo.GetProducts())
+            foreach (var prod in repo.GetProductAndReview())
             {
-                Console.WriteLine("Product Name:" + prod.Name);
+                Console.WriteLine($"Product Name: {prod.Name}  Reviews:  {prod.Comments}");
             }
 
             //repo.DeleteProduct(316);
             //repo.InsertProduct();
 
-            repo.InsertProduct("Davids");
+            //repo.InsertProduct("Davids");
 
 
 

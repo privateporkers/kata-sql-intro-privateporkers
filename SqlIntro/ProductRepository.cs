@@ -84,5 +84,19 @@ namespace SqlIntro
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public IEnumerable<Product> GetProductAndReview()
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                var cmd = conn.CreateCommand();
+                conn.Open();
+                cmd.CommandText = (@"SELECT p.Name, pr.Comments
+                FROM product as p
+                LEFT JOIN productreview as pr ON p.ProductId = pr.ProductId;");
+
+                
+            }
+        }
     }
 }

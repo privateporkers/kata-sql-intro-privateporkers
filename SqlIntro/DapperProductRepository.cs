@@ -46,7 +46,43 @@ namespace SqlIntro
             {
                 var cmd = conn.CreateCommand();
                 conn.Open();
-                conn.Query ($"INSERT INTO product (Name) VALUES ('{Name}')");
+                conn.Query ("INSERT INTO product (Name) VALUES ('@name')");
+                cmd.Parameters.AddWithValue("@name", Name);
+            }
+        }
+
+        public void UpdateProduct(string ProductName, int ProductId)
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                var cmd = conn.CreateCommand();
+                conn.Open();
+                conn.Query ("UPDATE product SET Name=('@pName') WHERE ProductId = (@pId) ");
+                cmd.Parameters.AddWithValue("pName", ProductName);
+                cmd.Parameters.AddWithValue("pId", ProductId);
+
+            }
+        }
+
+        public IEnumerable<Product> GetProductWithReview()
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                conn.Open();
+                return conn.Query<Product> (@"SELECT p.Name, pr.Comments
+                FROM product as p
+                INNER JOIN productreview as pr ON p.ProductId = pr.ProductId;");
+            }
+        }
+
+       public IEnumerable<Product> GetProductAndReview()
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                conn.Open();
+                return conn.Query<Product> (@"SELECT p.Name, pr.Comments
+                FROM product as p
+                LEFT JOIN productreview as pr ON p.ProductId = pr.ProductId;");
             }
         }
     }
