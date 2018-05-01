@@ -14,14 +14,6 @@ namespace SqlIntro
                 Console.WriteLine($"Product Name: {prod.Name}  Reviews:  {prod.Comments}");
             }
 
-            //repo.DeleteProduct(316);
-            //repo.InsertProduct();
-
-            //repo.InsertProduct("Davids");
-
-
-
-
             Console.ReadLine();
         }
     }

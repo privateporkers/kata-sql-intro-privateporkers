@@ -75,7 +75,7 @@ namespace SqlIntro
             }
         }
 
-       public IEnumerable<Product> GetProductAndReview()
+        public IEnumerable<Product> GetProductAndReview()
         {
             using (var conn = new MySqlConnection(_connectionString))
             {
