@@ -63,10 +63,11 @@ namespace SqlIntro
             //More on this in the future...  Nothing to do here..
             using (var conn = new MySqlConnection(_connectionString))
             {
+                conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "update product set name = @name where id = @id";
+                cmd.CommandText = "update product set name = @name where ProductID = @Id";
                 cmd.Parameters.AddWithValue("@name", prod.Name);
-                cmd.Parameters.AddWithValue("@id", prod.Id);
+                cmd.Parameters.AddWithValue("@Id", prod.Id);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -78,6 +79,7 @@ namespace SqlIntro
         {
             using (var conn = new MySqlConnection(_connectionString))
             {
+                conn.Open();
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT into product (Name) values(@name)";
                 cmd.Parameters.AddWithValue("@name", prod.Name);

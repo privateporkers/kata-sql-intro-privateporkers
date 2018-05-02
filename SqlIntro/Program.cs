@@ -13,7 +13,7 @@ namespace SqlIntro
             }*/
 
             //DapperChoice();
-            dapperCrudChoice(DapperChoice());
+            crudChoice(DapperChoice());
 
 
 
@@ -42,7 +42,17 @@ namespace SqlIntro
             var connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
 
             Console.WriteLine("Do you want to use Dapper? (y or n)");
-            var dap = Console.ReadLine();
+            string dap  = " ";
+
+            while( !( dap == "y" || dap == "n" ) )
+            {
+                dap = Console.ReadLine();
+                if(dap == "y" || dap == "n")
+                {
+                    break;
+                }
+                Console.WriteLine("That is is not a valid choicde, please choose another");
+            }
 
 
             if(dap == "y")
@@ -57,7 +67,7 @@ namespace SqlIntro
             return choice;
         }
 
-        public static void dapperCrudChoice(string str)
+        public static void crudChoice(string str)
         {
             var produ = new Product();
 
