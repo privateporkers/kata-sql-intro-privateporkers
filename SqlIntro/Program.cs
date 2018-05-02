@@ -13,10 +13,10 @@ namespace SqlIntro
             }*/
 
             //DapperChoice();
-            crudChoice(DapperChoice());
+            crudChoice(dapperChoice());
         }
 
-        public static string DapperChoice()
+        public static string dapperChoice()
         {
             var answ = " ";
             Console.WriteLine("Would you like to Create(C), Delete(D), Update(U), or get all(A)?");
