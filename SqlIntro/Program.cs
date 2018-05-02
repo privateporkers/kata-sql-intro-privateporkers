@@ -14,9 +14,6 @@ namespace SqlIntro
 
             //DapperChoice();
             crudChoice(DapperChoice());
-
-
-
         }
 
         public static string DapperChoice()
@@ -67,6 +64,18 @@ namespace SqlIntro
             return choice;
         }
 
+        public static int TestNum()
+        {
+            int num;
+
+            while(!int.TryParse(Console.ReadLine(), out num))
+            {
+                Console.WriteLine("That is not a number, please enter a valid number");
+            }
+
+            return num;
+        }
+
         public static void crudChoice(string str)
         {
             var produ = new Product();
@@ -95,9 +104,10 @@ namespace SqlIntro
             if(str == "d")
             {
                 Console.WriteLine("What Id would you like to delete?");
-                var num = Convert.ToInt32(  Console.ReadLine() );
-
+                int num;
+                num = TestNum();
                 repo.DeleteProduct(num);
+
             }
 
             if(str == "a")
