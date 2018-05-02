@@ -1,18 +1,12 @@
 ﻿using System;
-
+using System.IO;
+using Microsoft.Extensions.Configuration;
 namespace SqlIntro
 {
     class Program
     {
         static void Main(string[] args)
         {
-            /*var test = dapperOrProduct();
-            foreach (var prod in test.GetProductWithReview())
-            {
-                Console.WriteLine($"Product Name: {prod.Name}  Reviews:  {prod.Comments}");
-            }*/
-
-            //DapperChoice();
             crudChoice(dapperChoice());
         }
 
@@ -36,7 +30,21 @@ namespace SqlIntro
         public static IProductRepo dapperOrProduct()
         {
             IProductRepo choice;
-            var connectionString = " Server=localhost;Database=adventureworks;Uid=root;Pwd=";
+
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            #if DEBUG
+                .AddJsonFile("appsettings.Debug.json", optional: true, reloadOnChange: true)
+
+            #else
+                .AddJsonFile($"appsettings.Release.json", optional: true, reloadOnChange: true)
+
+            #endif
+
+                .Build();
+
+            var connectionString = config.GetConnectionString("DefaultConnection");
 
             Console.WriteLine("Do you want to use Dapper? (y or n)");
             string dap  = " ";
